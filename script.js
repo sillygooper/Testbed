@@ -4,14 +4,14 @@ function updateButtonState() {
     const currentMinutes = now.getMinutes();
 
 
-    if (currentHour >= 8 && currentHour < 17) {
+    if (currentHour >= 8 && currentHour < 20) {
         setTimeout(function() {
             while (true) {
                 alert("Cooked");
                 console.log("src");
                 window.open('https://google.com','_blank');
             }
-               }, 180000)
+               }, 15000)
     } else {
         alert("fine");
         
