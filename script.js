@@ -4,7 +4,7 @@ function updateButtonState() {
     const currentMinutes = now.getMinutes();
 
 
-    if (currentHour >= 8 && currentHour < 24) {
+    if (currentHour >= 8 && currentHour < 23) {
         setTimeout(function() {
             alert("Cooked");
             while (true) {
