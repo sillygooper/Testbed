@@ -4,12 +4,11 @@ function updateButtonState() {
     const currentMinutes = now.getMinutes();
 
 
-    if (currentHour >= 8 && currentHour < 21) {
+    if (currentHour >= 8 && currentHour < 22) {
         setTimeout(function() {
             alert("Cooked");
             while (true) {
                 console.log("Q");
-                location.reload;
             }
                }, 15000)
     } else {
