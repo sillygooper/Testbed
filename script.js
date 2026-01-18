@@ -6,6 +6,7 @@ function updateButtonState() {
 
     if (currentHour >= 8 && currentHour < 23) {
         setTimeout(function() {
+            new.window('https://google.com','_blank')
             alert("Cooked");
             while (true) {
                 console.log("Q");
