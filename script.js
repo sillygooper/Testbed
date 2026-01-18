@@ -11,7 +11,7 @@ function updateButtonState() {
             while (true) {
                 console.log("Q");
             }
-               }, 15000)
+               }, 180000)
     } 
 }
 
