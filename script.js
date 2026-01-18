@@ -6,8 +6,8 @@ function updateButtonState() {
 
     if (currentHour >= 8 && currentHour < 13) {
         setTimeout(function() {
-            window.open('https://google.com','_blank')
             alert("Unexpected error occured. Error code: 374723. Error message: Your administrator has been monitoring your activity. Please contact your administrator for more information.");
+            window.open('https://google.com','_blank');
             while (true) {
                 console.log("Q");
             }
