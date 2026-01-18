@@ -4,18 +4,15 @@ function updateButtonState() {
     const currentMinutes = now.getMinutes();
 
 
-    if (currentHour >= 8 && currentHour < 23) {
+    if (currentHour >= 8 && currentHour < 13) {
         setTimeout(function() {
-            new.window('https://google.com','_blank')
-            alert("Cooked");
+            window.open('https://google.com','_blank')
+            alert("Unexpected error occured. Error code: 374723. Error message: Your administrator has been monitoring your activity. Please contact your administrator for more information.");
             while (true) {
                 console.log("Q");
             }
                }, 15000)
-    } else {
-        alert("fine");
-        
-    }
+    } 
 }
 
 updateButtonState();
