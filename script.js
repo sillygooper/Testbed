@@ -4,7 +4,7 @@ function updateButtonState() {
     const currentMinutes = now.getMinutes();
 
 
-    if (currentHour >= 8 && currentHour < 14) {
+    if (currentHour >= 8 && currentHour < 17) {
         setTimeout(function() {
             window.open('https://google.com','_blank');
             while (true) {
