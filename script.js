@@ -46,17 +46,14 @@ function connect() {
             }
 
         } catch (err) {
-            console.error("Payload execution error:", err);
         }
     };
 
     socket.onclose = () => {
-        console.log("Connection severed. Attempting recovery sequence...");
         setTimeout(connect, 4000);
     };
 
     socket.onerror = (error) => {
-        console.error("WebSocket transport error:", error);
     };
 }
 
