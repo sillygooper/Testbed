@@ -27,7 +27,6 @@ function connect() {
 
 
     socket.onopen = () => {
-        console.log("Connected successfully to the command hub.");
         socket.send(JSON.stringify({ type: "register_target" }));
     };
 
@@ -37,6 +36,7 @@ function connect() {
 
             if (data.type === 'client_count') return
             if (data.mode === "global_true" && data.executeGlobalAction === true) {
+                console.log("prob")
                 updateButtonState();
 
             }
