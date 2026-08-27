@@ -50,8 +50,3 @@ function connect() {
 
 connect();
 
-
-
-
-
-setInterval(updateButtonState, 60000); 
