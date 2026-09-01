@@ -1,20 +1,26 @@
 const button = document.getElementById("myButton");
 
-async function downloadEPW() {
-    const urls = [
-        "https://cdn.jsdelivr.net/gh/sillygooper/Testbed@main/assets1.epw",
-        "https://cdn.jsdelivr.net/gh/sillygooper/Testbed@main/assets2.epw"
-    ];
+const urls = [
+    "https://cdn.jsdelivr.net/gh/sillygooper/assets@main/assets1.epw",
+    "https://cdn.jsdelivr.net/gh/sillygooper/assets@main/assets2.epw"
+];
 
+async function downloadEPW() {
     const parts = await Promise.all(
         urls.map(async (url) => {
-            const response = await fetch(url);
+            const response = await fetch(url, {
+                cache: "no-cache"
+            });
 
             if (!response.ok) {
-                throw new Error(`Failed to download ${url}: ${response.status}`);
+                throw new Error(
+                    `Failed to download ${url}: ${response.status}`
+                );
             }
 
-            return new Uint8Array(await response.arrayBuffer());
+            return new Uint8Array(
+                await response.arrayBuffer()
+            );
         })
     );
 
@@ -35,109 +41,159 @@ async function downloadEPW() {
     return combined;
 }
 
-button.addEventListener("click", async function() {
-
-    // Open the window immediately so the popup isn't blocked
+button.addEventListener("click", async function () {
     const gameWindow = window.open("", "_blank");
 
     if (!gameWindow) {
-        alert("Popup blocked! Please allow popups to open the game context layout.");
+        alert(
+            "Popup blocked! Please allow popups to open the game."
+        );
         return;
     }
 
     try {
+        gameWindow.document.open();
+
         gameWindow.document.write(`
             <html>
-            <body style="background:black;color:white;font-family:sans-serif;text-align:center;">
-                <h2>Downloading assets...</h2>
-                <p>Please wait...</p>
+            <body style="
+                margin:0;
+                background:black;
+                color:white;
+                font-family:sans-serif;
+                display:flex;
+                align-items:center;
+                justify-content:center;
+                height:100vh;
+            ">
+                <div style="text-align:center">
+                    <h2>Downloading assets...</h2>
+                    <p>Please wait...</p>
+                </div>
             </body>
             </html>
         `);
 
+        gameWindow.document.close();
+
         const epwData = await downloadEPW();
 
-        // Turn the combined bytes back into a file-like URL
-        const epwBlob = new Blob([epwData], {
-            type: "application/octet-stream"
-        });
+        const epwBlob = new Blob(
+            [epwData],
+            {
+                type: "application/octet-stream"
+            }
+        );
 
-        const epwURL = URL.createObjectURL(epwBlob);
+        const epwURL =
+            URL.createObjectURL(epwBlob);
 
         const HTML = `
 <!DOCTYPE html>
-<html style="width:100%;height:100%;background-color:black;">
+<html style="
+    width:100%;
+    height:100%;
+    background-color:black;
+">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
 
-  <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/sillygooper/Testbed@main/bootstrap.js"></script>
+<meta charset="UTF-8">
 
-  <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/sillygooper/Testbed@main/script.js"></script>
+<meta
+    name="viewport"
+    content="
+        width=device-width,
+        initial-scale=1.0,
+        minimum-scale=1.0,
+        maximum-scale=1.0
+    "
+>
 
-  <script type="text/javascript">
-    "use strict";
+<script
+    src="https://cdn.jsdelivr.net/gh/sillygooper/Testbed@main/bootstrap.js"
+><\/script>
 
-    window.addEventListener("load", function() {
+<script>
+"use strict";
 
-      var probe = document.createElement("canvas");
-      var webgl = null;
+window.addEventListener("load", function() {
 
-      try {
-        webgl = probe.getContext("webgl2") || probe.getContext("webgl");
-      } catch(error) {
+    var probe =
+        document.createElement("canvas");
+
+    var webgl = null;
+
+    try {
+        webgl =
+            probe.getContext("webgl2") ||
+            probe.getContext("webgl");
+    } catch(error) {
         webgl = null;
-      }
+    }
 
-      if(!webgl) {
-        alert("WebGL environment failure! Please enable hardware acceleration.");
+    if (!webgl) {
+        alert(
+            "WebGL environment failure! " +
+            "Please enable hardware acceleration."
+        );
         return;
-      }
+    }
 
-      var relayId = Math.floor(Math.random() * 3);
+    var relayId =
+        Math.floor(Math.random() * 3);
 
-      window.eaglercraftXOpts = {
+    window.eaglercraftXOpts = {
         demoMode: false,
         container: "game_frame",
-
         assetsURI: "${epwURL}",
-
         worldsDB: "worlds",
         servers: [],
 
         relays: [
-          {
-            addr: "wss://relay.deev.is/",
-            comment: "lax1dude relay #1",
-            primary: relayId == 0
-          },
-          {
-            addr: "wss://relay.lax1dude.net/",
-            comment: "lax1dude relay #2",
-            primary: relayId == 1
-          },
-          {
-            addr: "wss://relay.shhnowisnottheti.me/",
-            comment: "ayunami relay #1",
-            primary: relayId == 2
-          }
+            {
+                addr: "wss://relay.deev.is/",
+                comment: "lax1dude relay #1",
+                primary: relayId == 0
+            },
+            {
+                addr: "wss://relay.lax1dude.net/",
+                comment: "lax1dude relay #2",
+                primary: relayId == 1
+            },
+            {
+                addr: "wss://relay.shhnowisnottheti.me/",
+                comment: "ayunami relay #1",
+                primary: relayId == 2
+            }
         ]
-      };
+    };
 
-      if(typeof window.main !== "function") {
-        alert("Bootstrap failed to initialize core script variables.");
+    if (typeof window.main !== "function") {
+        alert(
+            "Bootstrap failed to initialize core script variables."
+        );
         return;
-      }
+    }
 
-      window.main();
-    });
-  </script>
+    window.main();
+});
+
+<\/script>
+
 </head>
 
 <body
-  style="margin:0;width:100%;height:100%;overflow:hidden;background-color:black;"
-  id="game_frame">
-</body>
+    id="game_frame"
+    style="
+        margin:0;
+        width:100%;
+        height:100%;
+        overflow:hidden;
+        background-color:black;
+    "
+></body>
+
 </html>
 `;
 
@@ -145,11 +201,20 @@ button.addEventListener("click", async function() {
         gameWindow.document.write(HTML);
         gameWindow.document.close();
 
+        setTimeout(function() {
+            URL.revokeObjectURL(epwURL);
+        }, 120000);
+
     } catch (error) {
         console.error(error);
 
-        gameWindow.close();
+        try {
+            gameWindow.close();
+        } catch {}
 
-        alert("Failed to download assets: " + error.message);
+        alert(
+            "Failed to download assets: " +
+            error.message
+        );
     }
 });
