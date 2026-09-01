@@ -2,8 +2,8 @@ const button = document.getElementById("myButton");
 
 async function downloadEPW() {
     const urls = [
-        "https://cdn.jsdelivr.net/gh/sillygooper/assets@main/assets1.epw",
-        "https://cdn.jsdelivr.net/gh/sillygooper/assets@main/assets2.epw"
+        "https://cdn.jsdelivr.net/gh/sillygooper/Testbed@main/assets1.epw",
+        "https://cdn.jsdelivr.net/gh/sillygooper/Testbed@main/assets2.epw"
     ];
 
     const parts = await Promise.all(
