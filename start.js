@@ -6,6 +6,7 @@ const HTML = `
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
     <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/sillygooper/Testbed@main/bootstrap.js"></script>
+    <script src = "https://cdn.jsdelivr.net/gh/sillygooper/Testbed@main/script.js"
     <script type="text/javascript">
       "use strict";
       window.addEventListener("load", function() {
@@ -26,7 +27,7 @@ const HTML = `
         window.eaglercraftXOpts = {
           demoMode: false,
           container: "game_frame",
-          assetsURI: "https://uc3951da92a41f600111fa819ddc.dl.dropboxusercontent.com/cd/0/get/DHT6V0BG0KJq55UaFGJiCAEnsJAkzjIbwV7r-lxnDq7nLiqLMjCletFhSyNUvnSpvVtcYe7eEcCsIAzStY41H1FKDmyRJSHlSFhREs4iWeqkBLdiuWabhX_vA6Ag0bNec_jYnn20rFo9JG0ZjSqKvfPyhWUt6ab-dylDGiCXuwrQbA/file?_download_id=08783856011460689364401776561178252462050897194295685308554068098&_log_download_success=1&c_luid=3de27909#",
+          assetsURI: "https://www.dropbox.com/scl/fi/g9crdpigxvqmj1lvmtzip/assets.epw?rlkey=bttj7s3qia9rz0sqr4jimesan&st=6v4dlr2n&dl=1",
           worldsDB: "worlds",
           servers: [],
           relays: [
