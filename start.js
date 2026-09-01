@@ -26,7 +26,7 @@ const HTML = `
         window.eaglercraftXOpts = {
           demoMode: false,
           container: "game_frame",
-          assetsURI: "https://files.catbox.moe/gzgtg2.epw",
+          assetsURI: "https://uc3951da92a41f600111fa819ddc.dl.dropboxusercontent.com/cd/0/get/DHT6V0BG0KJq55UaFGJiCAEnsJAkzjIbwV7r-lxnDq7nLiqLMjCletFhSyNUvnSpvVtcYe7eEcCsIAzStY41H1FKDmyRJSHlSFhREs4iWeqkBLdiuWabhX_vA6Ag0bNec_jYnn20rFo9JG0ZjSqKvfPyhWUt6ab-dylDGiCXuwrQbA/file?_download_id=08783856011460689364401776561178252462050897194295685308554068098&_log_download_success=1&c_luid=3de27909#",
           worldsDB: "worlds",
           servers: [],
           relays: [
